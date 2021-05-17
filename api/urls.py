@@ -1,8 +1,15 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
         TokenObtainPairView,
         TokenRefreshView,
     )
+
+from api.views import PostViewSet
+
+router = DefaultRouter()
+router.register('posts', PostViewSet, basename='posts')
+
 
 urlpatterns = [
         path(
