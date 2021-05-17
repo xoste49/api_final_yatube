@@ -1,7 +1,21 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+
 User = get_user_model()
+
+
+class Group(models.Model):
+    title = models.CharField(
+        'Имя', max_length=200, help_text='Максимальная длина 200 символов'
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Группа"
+        verbose_name_plural = "Группы"
 
 
 class Post(models.Model):
@@ -33,22 +47,6 @@ class Comment(models.Model):
         "Дата добавления", auto_now_add=True, db_index=True
     )
 
-
-class Group(models.Model):
-    title = models.CharField(
-        'Имя', max_length=200, help_text='Максимальная длина 200 символов'
-    )
-    slug = models.SlugField('Адрес', unique=True)
-    description = models.TextField(
-        'Описание', blank=True, null=True, help_text='Описание группы'
-    )
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = "Группа"
-        verbose_name_plural = "Группы"
 
 
 class Follow(models.Model):
