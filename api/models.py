@@ -12,6 +12,10 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="posts"
     )
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, blank=True, null=True,
+        verbose_name='Группа', help_text='Группа для записи'
+    )
 
     def __str__(self):
         return self.text
@@ -45,3 +49,29 @@ class Group(models.Model):
     class Meta:
         verbose_name = "Группа"
         verbose_name_plural = "Группы"
+
+
+class Follow(models.Model):
+    """
+    user — ссылка на объект пользователя, который подписывается.
+    Укажите имя связи: related_name="follower"
+
+    author — ссылка на объект пользователя, на которого подписываются,
+    имя связи пусть будет related_name="following"
+    """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="follower",
+        verbose_name='Подписчик'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="following",
+        verbose_name='Автор'
+    )
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
