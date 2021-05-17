@@ -5,10 +5,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from api.views import PostViewSet
+from .views import PostViewSet, GroupViewSet
 
 router = DefaultRouter()
 router.register('posts', PostViewSet, basename='posts')
+router.register('group', GroupViewSet, basename='group')
 
 urlpatterns = [
     path('', include(router.urls)),
