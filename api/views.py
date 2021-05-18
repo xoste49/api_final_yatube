@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
+from rest_framework import generics, filters
 
 from .models import Post, Group, Comment, Follow
 from .permissions import IsAuthorOrReadOnly
@@ -49,3 +50,5 @@ class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['user', 'following',]
