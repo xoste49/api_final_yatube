@@ -2,9 +2,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 
-from .models import Post, Group, Comment
+from .models import Post, Group, Comment, Follow
 from .permissions import IsAuthorOrReadOnly
-from .serializers import PostSerializer, GroupSerializer, CommentSerializer
+from .serializers import PostSerializer, GroupSerializer, CommentSerializer, \
+    FollowSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -42,3 +43,9 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
         serializer.save(author=self.request.user, post=post)
+
+
+class FollowViewSet(viewsets.ModelViewSet):
+    queryset = Follow.objects.all()
+    serializer_class = FollowSerializer
+    permission_classes = [IsAuthorOrReadOnly]
