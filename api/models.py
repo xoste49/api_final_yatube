@@ -48,7 +48,6 @@ class Comment(models.Model):
     )
 
 
-
 class Follow(models.Model):
     """
     user — ссылка на объект пользователя, который подписывается.
