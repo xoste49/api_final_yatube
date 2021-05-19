@@ -1,8 +1,8 @@
 requests
-django==3.2.3
-pytest==6.2.4
+django~=3.2.3
+pytest~=6.2.4
 pytest-django
-djangorestframework==3.12.4
+djangorestframework~=3.12.4
 djangorestframework-simplejwt
 
-django-filter==2.4.0
+django-filter~=2.4.0
