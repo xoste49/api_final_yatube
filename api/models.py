@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 User = get_user_model()
 
 
@@ -66,7 +65,7 @@ class Follow(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="following",
-        verbose_name='Подписан на'
+        verbose_name='Автор'
     )
 
     class Meta:
