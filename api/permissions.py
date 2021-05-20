@@ -9,7 +9,7 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
         # Проверяем авторизован ли пользователь или только безопасные запросы
-        return bool(
+        return (
             request.method in SAFE_METHODS
             or request.user and request.user.is_authenticated
         )
